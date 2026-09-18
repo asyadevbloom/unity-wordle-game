@@ -35,8 +35,11 @@
 - i didn't know about is, but there is a 2248 game, it's something different from 2048
 - old version of input system:
 <img width="853" height="806" alt="image" src="https://github.com/user-attachments/assets/ec00cabc-dc42-480d-bef8-2fa91fac1c5e" />
+
 - rewrote it using the new version:
 <img width="808" height="582" alt="image" src="https://github.com/user-attachments/assets/a5f4cb82-116f-4049-be09-d33c22cc5040" />
+
 - tried to debug for the first time, i guess:
 <img width="846" height="45" alt="image" src="https://github.com/user-attachments/assets/4d9e3cfd-ca99-4b4b-80fd-8ac54dae78df" />
+
 - Ctrl + K, then Ctrl + D - formats the entire file according to standard formatting rules
