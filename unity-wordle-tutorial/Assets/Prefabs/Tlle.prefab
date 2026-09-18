@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4431609308800384656}
   - component: {fileID: 7665847355221613736}
   - component: {fileID: 3549454883894660787}
+  - component: {fileID: 1129641563452305916}
   m_Layer: 5
   m_Name: Tlle
   m_TagString: Untagged
@@ -92,6 +93,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0.22745098, g: 0.22745098, b: 0.23529412, a: 1}
   m_EffectDistance: {x: 3, y: 3}
   m_UseGraphicAlpha: 1
+--- !u!114 &1129641563452305916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547522647883022320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c5d5732b601db4ab72ac3b0e40b3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tile
 --- !u!1 &5975851217246978401
 GameObject:
   m_ObjectHideFlags: 0
