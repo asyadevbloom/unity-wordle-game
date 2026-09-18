@@ -32,6 +32,8 @@
 - outline is for setting the outline, obviously
 - to use fonts in textmeshpro, you need to create a font asset for each font in SDF format
 
+
+
 - i didn't know about is, but there is a 2248 game, it's something different from 2048
 - old version of input system:
 <img width="853" height="806" alt="image" src="https://github.com/user-attachments/assets/ec00cabc-dc42-480d-bef8-2fa91fac1c5e" />
