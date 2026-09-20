@@ -49,16 +49,16 @@ or you can use functions Max() and Min(), but their combination is Clamp()
 - i decided to comment out the lines with the old version of Input for greater clarity
 
 - for Enter in the new Input System, there are two keys: the regular Enter and the Enter on the numeric keypad (Numpad), it's better to use both, so the game works on any keyboard:
-![[Pasted image 20260920130544.png]]
+<img width="1038" height="115" alt="image" src="https://github.com/user-attachments/assets/f1132c50-eab3-488a-85e3-1583d93b6fd3" />
 
 - how to work with resources format txt for example:
-![[Pasted image 20260920140055.png]]
+<img width="701" height="50" alt="image" src="https://github.com/user-attachments/assets/33482f47-1e62-493f-b6a1-edebc2006d4a" />
 
 - this line takes the text from the loaded file and splits it into an array, it splits by the newline character '\n', so each line in the file becomes one element in the array
-![[Pasted image 20260920140002.png]]
+<img width="273" height="32" alt="image" src="https://github.com/user-attachments/assets/51785f95-6eb1-429e-b8e5-feb51ba578db" />
 
 - we can switch to debug and see what's happening when we start the game:
-![[Pasted image 20260920140511.png]]
+<img width="1604" height="320" alt="image" src="https://github.com/user-attachments/assets/f266c997-edce-453d-806d-37d2a990ff4a" />
 
 - Random.Range() is a function that returns a random number within a specified range. there are two versions of this function, and they behave differently depending on the type of numbers you give it. the integer version and the float version. the integer version excludes the maximum value
 - Trim() is a string method that removes whitespace characters from the beginning and the end of a string, it doesn't remove spaces in the middle
@@ -68,7 +68,6 @@ or you can use functions Max() and Min(), but their combination is Clamp()
 
 - [System.Serializable] and [Header("States")] are attributes that help organize and store data. the first one makes your custom class visible in the Unity Inspector so you can edit its values, the second one adds a bold title "States" above the field in the Inspector
 
-![[Pasted image 20260920150508.png]]
-![[Pasted image 20260920150428.png]]
-![[Pasted image 20260920150642.png]]
-
+<img width="323" height="192" alt="image" src="https://github.com/user-attachments/assets/d0df701f-db87-4247-aeaa-2487d68a6fa4" />
+<img width="353" height="232" alt="image" src="https://github.com/user-attachments/assets/4d8ab946-95e7-4ed2-8f2a-15b9a76d73ca" />
+<img width="460" height="277" alt="image" src="https://github.com/user-attachments/assets/24921283-386e-4913-a50e-5ca03bf1b3e5" />
