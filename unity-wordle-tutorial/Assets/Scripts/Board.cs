@@ -14,12 +14,44 @@ public class Board : MonoBehaviour
 
     private Row[] rows;
 
+    private string[] solutions;
+    private string[] validWords;
+    private string word;
+
     private int rowIndex;
     private int columnIndex;
+
+    [Header("States")]
+    public Tile.State emptyState;
+    public Tile.State occupiedState;
+    public Tile.State correctState;
+    public Tile.State wrongSpotState;
+    public Tile.State incorrectState;
 
     private void Awake()
     {
         rows = GetComponentsInChildren<Row>();
+    }
+
+    private void Start()
+    {
+        LoadData();
+        SetRandomWord();
+    }
+
+    private void LoadData()
+    {
+        TextAsset textFile = Resources.Load("official_wordle_all") as TextAsset;
+        validWords = textFile.text.Split('\n');
+
+        textFile = Resources.Load("official_wordle_common") as TextAsset;
+        solutions = textFile.text.Split('\n');
+    }
+
+    private void SetRandomWord()
+    {
+        word = solutions[Random.Range(0, solutions.Length)];
+        word = word.ToLower().Trim();
     }
 
     //private void Update()
@@ -37,31 +69,43 @@ public class Board : MonoBehaviour
 
     private void Update()
     {
-        if (columnIndex >= rows[rowIndex].tiles.Length)
+        Row currentRow = rows[rowIndex];
+
+        if (Keyboard.current == null) return;
+
+        //if (Input.GetKeyDown(KeyCode.Backspace))
+        if (Keyboard.current.backspaceKey.wasPressedThisFrame)
         {
-            //submit row...
+            columnIndex = Mathf.Max(columnIndex - 1, 0);
+            currentRow.tiles[columnIndex].SetLetter('\0');
+            currentRow.tiles[columnIndex].SetState(emptyState);
+        }
+        else if (columnIndex >= currentRow.tiles.Length)
+        {
+            //if (Input.GetKeyDown(KeyCode.Return))
+            if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.numpadEnterKey.wasPressedThisFrame)
+            {
+                SubmitRow(currentRow);
+            }
         }
         else
         {
-            if (Keyboard.current != null)
+            foreach (var key in Keyboard.current.allKeys)
             {
-                foreach (var key in Keyboard.current.allKeys)
+                if (key.wasPressedThisFrame)
                 {
-                    if (key.wasPressedThisFrame)
+                    string keyName = key.displayName;
+
+                    if (keyName.Length == 1 && char.IsLetter(keyName[0]))
                     {
-                        string keyName = key.displayName;
+                        char letter = char.ToUpper(keyName[0]);
 
-                        // check that it's a letter from 'A' to 'Z'
-                        if (keyName.Length == 1 && char.IsLetter(keyName[0]))
+                        if (letter >= 'A' && letter <= 'Z')
                         {
-                            char letter = char.ToUpper(keyName[0]);
-
-                            if (letter >= 'A' && letter <= 'Z')
-                            {
-                                rows[rowIndex].tiles[columnIndex].SetLetter(letter);
-                                columnIndex++;
-                                break;
-                            }
+                            currentRow.tiles[columnIndex].SetLetter(letter);
+                            currentRow.tiles[columnIndex].SetState(occupiedState);
+                            columnIndex++;
+                            break;
                         }
                     }
                 }
@@ -69,4 +113,32 @@ public class Board : MonoBehaviour
         }
     }
 
+    private void SubmitRow(Row row)
+    {
+        for (int i = 0; i < row.tiles.Length; i++ )
+        {
+            Tile tile = row.tiles[i];
+
+            if (tile.letter == word[i])
+            {
+                tile.SetState(correctState);
+            } else if (word.Contains(tile.letter))
+            {
+                tile.SetState(wrongSpotState);
+            } else
+            {
+                tile.SetState(incorrectState);
+            }
+        }
+
+        rowIndex++;
+        columnIndex = 0;
+
+        if (rowIndex >= rows.Length)
+        {
+            enabled = false;
+        }
+    }
 }
+
+
