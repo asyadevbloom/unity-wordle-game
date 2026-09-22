@@ -14,16 +14,17 @@ public class Board : MonoBehaviour
     //    KeyCode.Y, KeyCode.Z,
     //};
 
+    private static readonly string[] SEPARATOR = new string[] { "\r\n", "\r", "\n" };
+
     private Row[] rows;
+    private int rowIndex;
+    private int columnIndex;
 
     private string[] solutions;
     private string[] validWords;
     private string word;
 
-    private int rowIndex;
-    private int columnIndex;
-
-    [Header("States")]
+    [Header("Tiles")]
     public Tile.State emptyState;
     public Tile.State occupiedState;
     public Tile.State correctState;
@@ -64,10 +65,12 @@ public class Board : MonoBehaviour
     private void LoadData()
     {
         TextAsset textFile = Resources.Load("official_wordle_all") as TextAsset;
-        validWords = textFile.text.Split('\n');
+        //validWords = textFile.text.Split('\n');
+        validWords = textFile.text.Split(SEPARATOR, System.StringSplitOptions.None);
 
         textFile = Resources.Load("official_wordle_common") as TextAsset;
-        solutions = textFile.text.Split('\n');
+        //solutions = textFile.text.Split('\n');
+        solutions = textFile.text.Split(SEPARATOR, System.StringSplitOptions.None);
     }
 
     private void SetRandomWord()
@@ -119,12 +122,12 @@ public class Board : MonoBehaviour
                 if (key.wasPressedThisFrame)
                 {
                     string keyName = key.displayName;
-
+                 
                     if (keyName.Length == 1 && char.IsLetter(keyName[0]))
                     {
-                        char letter = char.ToUpper(keyName[0]);
-
-                        if (letter >= 'A' && letter <= 'Z')
+                        char letter = char.ToLower(keyName[0]);
+                     
+                        if (letter >= 'a' && letter <= 'z')
                         {
                             currentRow.tiles[columnIndex].SetLetter(letter);
                             currentRow.tiles[columnIndex].SetState(occupiedState);
@@ -216,7 +219,8 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < validWords.Length; i++)
         {
-            if (validWords[i] == word)
+            //if (validWords[i] == word)
+            if (string.Equals(word, validWords[i], System.StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
